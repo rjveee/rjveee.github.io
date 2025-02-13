@@ -330,3 +330,29 @@ footer {
 footer svg {
   width: 100px;
 }
+
+@media (max-width: 375px) {
+  :root {
+    --envelope-x: 90vw; /* Adjusts envelope size */
+    --envelope-y: 50vh;
+    --letter-x: 85vw; /* Adjusts letter size */
+    --letter-y: 40vh;
+    --heart-bg: red;
+  }
+
+  .envelope {
+    width: var(--envelope-x);
+    height: var(--envelope-y);
+  }
+
+  .letter {
+    width: var(--letter-x);
+    height: var(--letter-y);
+    font-size: 1rem; /* Ensures text is readable */
+    padding: 1.5rem;
+  }
+
+  .heart {
+    width: 50px; /* Smaller heart for better fit */
+  }
+}
