@@ -1,40 +1,65 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="author" content="MohamedDine">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Tinatanging</title>
+    <script src="main.js"></script>
+    <title>Valentine's Day Card</title>
 </head>
 <body>
-
-  <div class="birthday-message" style="display: none;">
-    <h1>Please use a wider screen!</h1>
-    <p>🎉 Happy Birthday! 🎂 🎈</p>
-  </div>
-    
-    <div class="envelope new">
-        <div class="front">
-          <div class="mail">
-            <p>Anna Joy's 18th Birthday</p>
-            <p>Click me</p>
-          </div>
+    <div class="card">
+        <div class="heart-container">
+            <svg viewBox="0 0 100 100" width="100" height="100">
+                <path class="heart" d="M50 88.9L16.7 55.6C7.2 46.1 7.2 30.9 16.7 21.4s24.7-9.5 34.2 0L50 20.5l-0.9 0.9c9.5-9.5 24.7-9.5 34.2 0s9.5 24.7 0 34.2L50 88.9z"/>
+                <path class="broken-heart" d="M50 88.9L16.7 55.6C7.2 46.1 7.2 30.9 16.7 21.4s24.7-9.5 34.2 0L50 20.5l-0.9 0.9c9.5-9.5 24.7-9.5 34.2 0s9.5 24.7 0 34.2L50 88.9z"/>
+                <circle class="sparkle" cx="25" cy="25" r="2"/>
+                <circle class="sparkle" cx="75" cy="25" r="2"/>
+                <circle class="sparkle" cx="50" cy="15" r="2"/>
+            </svg>
         </div>
-        <div class="back">
-          <div class="letter">
-                  <p id="l1">To my Palagi </p><p id="l2">Happy 18th Birthday my Dearest Bebu, Welcome to Legality !!!!! All I want to say is I wish and pray that God will grant the desires of your heart and will keep you safe always. Please know that I will always be here for you and that I will love you always, in all ways. No matter what happens know that you’ll still be and always be the person that ill run to. I promise that I will be faithful to you and to you alone in the name of Jesus. I love you with all my heart my love, know that I will always be here to see you succeed in life and support you always. Thank you my PALAGI I love you.</p>
-                      <p>Your Palagi</p>
-          </div>
-          <div class="flip left-flip"></div>
-          <div class="flip right-flip"></div>
-          <div class="flip bottom-flip"></div>
-          <div class="flip top-flip"></div>
+
+        <div class="question active" id="q1">
+            <h1 class="message">Will you be my Valentine? 💝</h1>
+            <div class="btn-container">
+                <button class="btn" onclick="nextQuestion(true, 1)">Yes!</button>
+                <div class="no-btn-container">
+                    <button class="btn no" onclick="handleNo()" onmouseover="dodgeNo()">No</button>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <button id="redirectButton" style="display: none;">PALAGI</button>
+        <div class="question" id="q2">
+            <h1 class="message">Would you like to spend your life with me? 🌹</h1>
+            <div class="btn-container">
+                <button class="btn" onclick="nextQuestion(true, 2)">Of course!</button>
+                <div class="no-btn-container">
+                    <button class="btn no" onclick="handleNo()" onmouseover="dodgeNo()">No way</button>
+                </div>
+            </div>
+        </div>
 
+        <div class="question" id="q3">
+            <h1 class="message">Can I have a hugsies and kissies? 🤗</h1>
+            <div class="btn-container">
+                <button class="btn" onclick="nextQuestion(true, 3)">Come here!</button>
+                <div class="no-btn-container">
+                    <button class="btn no" onclick="handleNo()" onmouseover="dodgeNo()">Nope</button>
+                </div>
+            </div>
+        </div>
 
-    <script src="main.js"></script>
+        <div class="question" id="final">
+            <h1 class="message">You've made me the happiest person ever! Thank You Baby, Happy Valentines. I love youuuu, mwahhhhh ❤️</h1>
+            <a href="2nd.html" class="valentine-btn" id="valentineBtn">💖 Special Surprise 💖</a>
+        </div>
+        <div class="question" id="rejected">
+            <h1 class="message">😢 But... but... please?</h1>
+            <div class="btn-container">
+                <button class="btn" onclick="resetQuestions()">Ok, let me try again</button>
+            </div>
+        </div>
+        <div class="floating-hearts"></div>
+    </div>
 </body>
 </html>

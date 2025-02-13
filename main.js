@@ -1,39 +1,103 @@
-window.onload = function() {
-    function checkScreenWidth() {
-        const birthdayMessage = document.querySelector('.birthday-message');
-        if (window.innerWidth <= 600) {
-            birthdayMessage.style.display = 'block';
-            document.querySelector('.envelope').style.display = 'none';
+let noButtonDodgeCount = 0;
+const maxDodges = 5;
+
+function nextQuestion(accepted, questionNumber) {
+    if (accepted) {
+        document.querySelector(`#q${questionNumber}`).classList.remove('active');
+        if (questionNumber < 3) {
+            document.querySelector(`#q${questionNumber + 1}`).classList.add('active');
         } else {
-            birthdayMessage.style.display = 'none';
-            document.querySelector('.envelope').style.display = 'block';
+            document.querySelector('#final').classList.add('active');
+            celebrateAcceptance();
         }
     }
+}
 
-    // Check screen width on load
-    checkScreenWidth();
+function handleNo() {
+    if (noButtonDodgeCount >= maxDodges) {
+        document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+        document.querySelector('#rejected').classList.add('active');
+        document.querySelector('.heart').style.display = 'none';
+        document.querySelector('.broken-heart').style.display = 'block';
+    }
+}
+
+function dodgeNo() {
+    if (noButtonDodgeCount < maxDodges) {
+        const btn = document.querySelector('.btn.no');
+        btn.style.transform = `translate(${Math.random() * 200 - 100}px, ${Math.random() * 100 - 50}px)`;
+        noButtonDodgeCount++;
+    }
+}
+
+function resetQuestions() {
+    document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+    document.querySelector('#q1').classList.add('active');
+    document.querySelector('.heart').style.display = 'block';
+    document.querySelector('.broken-heart').style.display = 'none';
+    noButtonDodgeCount = 0;
+    const noBtn = document.querySelector('.btn.no');
+    noBtn.style.transform = 'none';
+}
+
+function celebrateAcceptance() {
+    const container = document.querySelector('.floating-hearts');
+    for (let i = 0; i < 15; i++) {
+        createHeart(container);
+    }
+}
+
+function createHeart(container) {
+    const heart = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    heart.setAttribute('viewBox', '0 0 100 100');
+    heart.style.width = '30px';
+    heart.style.height = '30px';
+    heart.style.position = 'absolute';
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.animation = `float ${3 + Math.random() * 3}s linear infinite`;
     
-    // Add event listener to check width on resize
-    window.addEventListener('resize', checkScreenWidth);
-};
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute('d', 'M50 88.9L16.7 55.6C7.2 46.1 7.2 30.9 16.7 21.4s24.7-9.5 34.2 0L50 20.5l-0.9 0.9c9.5-9.5 24.7-9.5 34.2 0s9.5 24.7 0 34.2L50 88.9z');
+    path.style.fill = `hsl(${Math.random() * 60 + 330}, 100%, 65%)`;
+    
+    heart.appendChild(path);
+    container.appendChild(heart);
+    
+    setTimeout(() => {
+        container.removeChild(heart);
+    }, 6000);
+}
 
-document.addEventListener('DOMContentLoaded', function() {
-  var envelope = document.querySelector('.envelope');
-  var redirectButton = document.getElementById('redirectButton');
+function celebrateAcceptance() {
+    const container = document.querySelector('.floating-hearts');
+    for (let i = 0; i < 15; i++) {
+        createHeart(container);
+    }
 
-  envelope.addEventListener('click', function() {
-      if (!envelope.classList.contains('open')) {
-          envelope.classList.remove('new');
-          envelope.classList.add('open');
+    // Create Valentine Button
+    const finalDiv = document.getElementById('final');
+    const valentineBtn = document.createElement('a');
+    valentineBtn.href = '2nd.html';
+    valentineBtn.classList.add('valentine-btn');
+    valentineBtn.textContent = '💖 Special Surprise 💖';
 
-          // Show the button after the animation is done
-          setTimeout(function() {
-              redirectButton.style.display = 'block';
-          }, 3000); // Adjust time to match the animation duration
-      }
-  });
+    // Append button to #final if not already added
+    if (!document.querySelector('.valentine-btn')) {
+        finalDiv.appendChild(valentineBtn);
+    }
+}
 
-  redirectButton.addEventListener('click', function() {
-      window.location.href = 'pictures.html'; // Redirect to pictures.html
-  });
+document.addEventListener("DOMContentLoaded", function () {
+    const button = document.getElementById("valentineBtn");
+    
+    if (button) {
+        button.addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent immediate navigation
+            document.body.classList.add("fade-out");
+
+            setTimeout(() => {
+                window.location.href = button.href; // Navigate after fade-out
+            }, 500); // Match this delay with the CSS transition duration
+        });
+    }
 });
